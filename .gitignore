@@ -1,0 +1,16 @@
+obj
+bin
+_ReSharper.*
+*.user
+*.suo
+*.csproj[1-9]*
+*.cache
+*~
+*.swp
+NDependOut
+*mm_cache.bin
+
+*.ncrunchsolution
+*.ncrunchproject
+
+/packages
