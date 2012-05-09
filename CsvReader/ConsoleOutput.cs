@@ -7,9 +7,14 @@ namespace CsvReader
 {
   class ConsoleOutput : IOutput
   {
-    public void Write(string output)
+    public void Write(string output, params object[] args)
     {
-      Console.WriteLine(output);
+      Console.Write(output, args);
+    }
+    
+    public void WriteLine(string output, params object[] args)
+    {
+      Console.WriteLine(output, args);
     }
 
     public char Read()

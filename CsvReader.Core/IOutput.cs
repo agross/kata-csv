@@ -2,7 +2,8 @@ namespace CsvReader.Core
 {
   public interface IOutput
   {
-    void Write(string output);
+    void Write(string output, params object[] args);
+    void WriteLine(string output, params object[] args);
     char Read();
     void Clear();
   }

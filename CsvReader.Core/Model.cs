@@ -30,9 +30,10 @@ namespace CsvReader.Core
       }
     }
 
-    public virtual void AddRow(IEnumerable<string> items)
+    public virtual Model AddRow(IEnumerable<string> items)
     {
       _rows.Add(items);
+      return this;
     }
 
     public virtual void SetHeader(IEnumerable<string> items)

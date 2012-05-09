@@ -1,3 +1,5 @@
+using System;
+
 namespace CsvReader.Core
 {
   public class DisplayCoordinator
@@ -22,8 +24,11 @@ namespace CsvReader.Core
       {
         var pagedModel = new PagedModel(model, pageIndex, pageSize);
         var formatted = _formatter.Format(pagedModel);
+
         _output.Clear();
         _output.Write(formatted);
+        _output.WriteLine("Page {0} of {1}", pageIndex + 1, pagedModel.MaxPageIndex + 1);
+        _output.WriteLine(string.Empty);
         _output.Write("N(ext page, P(revious page, F(irst page, L(ast page, eX(it");
         var action = _output.Read();
 

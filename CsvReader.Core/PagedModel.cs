@@ -41,7 +41,7 @@ namespace CsvReader.Core
       }
     }
 
-    public override void AddRow(IEnumerable<string> items)
+    public override Model AddRow(IEnumerable<string> items)
     {
       throw new NotSupportedException();
     }
