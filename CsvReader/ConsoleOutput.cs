@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 using CsvReader.Core;
 
@@ -14,6 +15,11 @@ namespace CsvReader
     public char Read()
     {
       return Console.ReadKey().KeyChar;
+    }
+
+    public void Clear()
+    {
+      Console.Clear();
     }
   }
 }

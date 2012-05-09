@@ -4,5 +4,6 @@ namespace CsvReader.Core
   {
     void Write(string output);
     char Read();
+    void Clear();
   }
 }

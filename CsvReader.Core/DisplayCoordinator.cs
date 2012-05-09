@@ -22,6 +22,7 @@ namespace CsvReader.Core
       {
         var pagedModel = new PagedModel(model, pageIndex, pageSize);
         var formatted = _formatter.Format(pagedModel);
+        _output.Clear();
         _output.Write(formatted);
         _output.Write("N(ext page, P(revious page, F(irst page, L(ast page, eX(it");
         var action = _output.Read();
