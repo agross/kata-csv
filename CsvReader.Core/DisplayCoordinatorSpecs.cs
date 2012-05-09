@@ -25,6 +25,40 @@ namespace CsvReader.Core
     }
 
     [Test]
+    public void ShouldChangeToFirstPageWhen_F_IsPressed()
+    {
+      var output = A.Fake<IOutput>();
+      A
+        .CallTo(() => output.Read())
+        .ReturnsNextFromSequence('f', 'x');
+
+      var coordinator = new DisplayCoordinator(A.Fake<IFileReader>(), A.Fake<IFormatter>(), output);
+
+      coordinator.Display("file.csv", 42);
+
+      A
+        .CallTo(() => output.Read())
+        .MustHaveHappened(Repeated.Like(i => i == 2));
+    }
+
+    [Test]
+    public void ShouldChangeToLastPageWhen_L_IsPressed()
+    {
+      var output = A.Fake<IOutput>();
+      A
+        .CallTo(() => output.Read())
+        .ReturnsNextFromSequence('l', 'x');
+
+      var coordinator = new DisplayCoordinator(A.Fake<IFileReader>(), A.Fake<IFormatter>(), output);
+
+      coordinator.Display("file.csv", 42);
+
+      A
+        .CallTo(() => output.Read())
+        .MustHaveHappened(Repeated.Like(i => i == 2));
+    }
+
+    [Test]
     public void ShouldChangeToPreviousPageWhen_P_IsPressed()
     {
       var output = A.Fake<IOutput>();

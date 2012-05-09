@@ -32,21 +32,31 @@ namespace CsvReader.Core
           case "N":
             pageIndex += 1;
             break;
-          
+
           case "P":
             pageIndex -= 1;
             break;
-          
+
           case "F":
             pageIndex = 0;
             break;
-          
+
           case "L":
             pageIndex = pagedModel.MaxPageIndex;
             break;
 
           case "X":
             return;
+        }
+
+        if (pageIndex < 0)
+        {
+          pageIndex = 0;
+        }
+
+        if (pageIndex > pagedModel.MaxPageIndex)
+        {
+          pageIndex = pagedModel.MaxPageIndex;
         }
       }
     }
