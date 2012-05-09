@@ -45,13 +45,27 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ExitApplicationCommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\SetCurrentPageCommand.cs" />
     <Compile Include="CsvFileReader.cs" />
     <Compile Include="DisplayCoordinator.cs" />
     <Compile Include="DisplayCoordinatorSpecs.cs" />
     <Compile Include="IFileReader.cs" />
     <Compile Include="IFormatter.cs" />
+    <Compile Include="Interactions\Exit.cs" />
+    <Compile Include="Interactions\FirstPage.cs" />
+    <Compile Include="Interactions\FirstPageSpecs.cs" />
+    <Compile Include="Interactions\IInteraction.cs" />
+    <Compile Include="Interactions\JumpToPage.cs" />
+    <Compile Include="Interactions\JumpToPageSpecs.cs" />
+    <Compile Include="Interactions\LastPage.cs" />
+    <Compile Include="Interactions\NoOp.cs" />
+    <Compile Include="Interactions\PageInteractionBase.cs" />
+    <Compile Include="Interactions\PreviousPage.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="ModelSpecs.cs" />
+    <Compile Include="Interactions\NextPage.cs" />
     <Compile Include="NumberedModel.cs" />
     <Compile Include="NumberedModelSpecs.cs" />
     <Compile Include="PagedModelSpecs.cs" />

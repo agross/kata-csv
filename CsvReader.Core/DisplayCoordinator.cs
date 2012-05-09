@@ -1,4 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using CsvReader.Core.Commands;
+using CsvReader.Core.Interactions;
 
 namespace CsvReader.Core
 {
@@ -7,9 +12,21 @@ namespace CsvReader.Core
     readonly IFileReader _fileReader;
     readonly IFormatter _formatter;
     readonly IOutput _output;
+    readonly IEnumerable<IInteraction> _possibleInteractions = Enumerable.Empty<IInteraction>();
+
 
     public DisplayCoordinator(IFileReader fileReader, IFormatter formatter, IOutput output)
     {
+      _possibleInteractions = new IInteraction[]
+                             {
+                               new Exit(),
+                               new NextPage(),
+                               new PreviousPage(),
+                               new LastPage(),
+                               new FirstPage(),
+                               new JumpToPage(output),
+                               new NoOp()
+                             };
       _fileReader = fileReader;
       _formatter = formatter;
       _output = output;
@@ -28,42 +45,25 @@ namespace CsvReader.Core
         _output.Clear();
         _output.Write(formatted);
         _output.WriteLine("Page {0} of {1}", pageIndex + 1, pagedModel.MaxPageIndex + 1);
-        _output.WriteLine(string.Empty);
-        _output.Write("N(ext page, P(revious page, F(irst page, L(ast page, eX(it");
-        var action = _output.Read();
+        _output.WriteLine(String.Empty);
+        _output.Write("N(ext page, P(revious page, F(irst page, L(ast page, J(ump to page, eX(it");
+       
+        var userInput = _output.Read();
 
-        switch (action.ToString().ToUpperInvariant())
-        {
-          case "N":
-            pageIndex += 1;
-            break;
-
-          case "P":
-            pageIndex -= 1;
-            break;
-
-          case "F":
-            pageIndex = 0;
-            break;
-
-          case "L":
-            pageIndex = pagedModel.MaxPageIndex;
-            break;
-
-          case "X":
-            return;
-        }
-
+        var nextAction = DetermineNextAction(pagedModel, userInput, pageIndex);
+        pageIndex = nextAction.Execute();
         if (pageIndex < 0)
         {
-          pageIndex = 0;
-        }
-
-        if (pageIndex > pagedModel.MaxPageIndex)
-        {
-          pageIndex = pagedModel.MaxPageIndex;
+          return;
         }
       }
+    }
+
+    ICommand DetermineNextAction(PagedModel pagedModel, char action, int currentPageIndex)
+    {
+      return _possibleInteractions
+        .First(x => x.CanHandle(action.ToString().ToUpperInvariant()))
+        .GetCommand(pagedModel, currentPageIndex);
     }
   }
 }

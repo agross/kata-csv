@@ -22,6 +22,11 @@ namespace CsvReader
       return Console.ReadKey().KeyChar;
     }
 
+    public string ReadLine()
+    {
+      return Console.ReadLine();
+    }
+
     public void Clear()
     {
       Console.Clear();
