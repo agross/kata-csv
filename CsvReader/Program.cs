@@ -6,7 +6,7 @@ namespace CsvReader
   {
     static void Main(string[] args)
     {
-      var coordinator = new DisplayCoordinator(new CsvFileReader(), new TableFormatter(), new ConsoleOutput());
+      var coordinator = new DisplayCoordinator(new CsvFileReader(), new TableFormatter(), new ConsoleConsole());
       coordinator.Display("persons.csv", 3);
     }
   }

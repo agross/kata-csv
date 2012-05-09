@@ -12,7 +12,7 @@ namespace CsvReader.Core
     [Test]
     public void ShouldChangeToFirstPageWhen_F_IsPressed()
     {
-      var output = A.Fake<IOutput>();
+      var output = A.Fake<IConsole>();
       A
         .CallTo(() => output.Read())
         .ReturnsNextFromSequence('f', 'x');
@@ -29,7 +29,7 @@ namespace CsvReader.Core
     [Test]
     public void ShouldChangeToLastPageWhen_L_IsPressed()
     {
-      var output = A.Fake<IOutput>();
+      var output = A.Fake<IConsole>();
       A
         .CallTo(() => output.Read())
         .ReturnsNextFromSequence('l', 'x');
@@ -46,7 +46,7 @@ namespace CsvReader.Core
     [Test]
     public void ShouldChangeToNextPageWhen_N_IsPressed()
     {
-      var output = A.Fake<IOutput>();
+      var output = A.Fake<IConsole>();
       A
         .CallTo(() => output.Read())
         .ReturnsNextFromSequence('n', 'x');
@@ -71,7 +71,7 @@ namespace CsvReader.Core
     [Test]
     public void ShouldChangeToPreviousPageWhen_P_IsPressed()
     {
-      var output = A.Fake<IOutput>();
+      var output = A.Fake<IConsole>();
       A
         .CallTo(() => output.Read())
         .ReturnsNextFromSequence('p', 'x');
@@ -88,7 +88,7 @@ namespace CsvReader.Core
     [Test]
     public void ShouldExitWhen_X_IsPressed()
     {
-      var output = A.Fake<IOutput>();
+      var output = A.Fake<IConsole>();
       A
         .CallTo(() => output.Read())
         .Returns('x');
@@ -112,7 +112,7 @@ namespace CsvReader.Core
         .WithAnyArguments()
         .Returns("Die Tabelle");
 
-      var output = A.Fake<IOutput>();
+      var output = A.Fake<IConsole>();
       A
         .CallTo(() => output.Read())
         .Returns('x');
@@ -154,7 +154,7 @@ namespace CsvReader.Core
                    .AddRow(new[] { "two" }));
 
       var formatter = new TableFormatter();
-      var output = A.Fake<IOutput>();
+      var output = A.Fake<IConsole>();
       A
         .CallTo(() => output.Read())
         .Returns('x');

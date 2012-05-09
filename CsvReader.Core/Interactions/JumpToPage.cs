@@ -4,11 +4,11 @@ namespace CsvReader.Core.Interactions
 {
   class JumpToPage : PageInteraction, IInteraction
   {
-    readonly IOutput _output;
+    readonly IConsole _console;
 
-    public JumpToPage(IOutput output)
+    public JumpToPage(IConsole console)
     {
-      _output = output;
+      _console = console;
     }
 
     public bool CanHandle(string userInput)
@@ -18,8 +18,8 @@ namespace CsvReader.Core.Interactions
 
     public ICommand GetCommand(PagedModel model, int currentPageIndex)
     {
-      _output.Write("Page? ");
-      var page = _output.ReadLine();
+      _console.Write("Page? ");
+      var page = _console.ReadLine();
 
       int newPageIndex;
       if(int.TryParse(page, out newPageIndex))

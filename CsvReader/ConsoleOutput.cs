@@ -5,7 +5,7 @@ using CsvReader.Core;
 
 namespace CsvReader
 {
-  class ConsoleOutput : IOutput
+  class ConsoleConsole : IConsole
   {
     public void Write(string output, params object[] args)
     {

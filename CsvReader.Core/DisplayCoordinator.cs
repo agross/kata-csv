@@ -11,11 +11,11 @@ namespace CsvReader.Core
   {
     readonly IFileReader _fileReader;
     readonly IFormatter _formatter;
-    readonly IOutput _output;
+    readonly IConsole _console;
     readonly IEnumerable<IInteraction> _possibleInteractions = Enumerable.Empty<IInteraction>();
 
 
-    public DisplayCoordinator(IFileReader fileReader, IFormatter formatter, IOutput output)
+    public DisplayCoordinator(IFileReader fileReader, IFormatter formatter, IConsole console)
     {
       _possibleInteractions = new IInteraction[]
                              {
@@ -24,12 +24,12 @@ namespace CsvReader.Core
                                new PreviousPage(),
                                new LastPage(),
                                new FirstPage(),
-                               new JumpToPage(output),
+                               new JumpToPage(console),
                                new NoOp()
                              };
       _fileReader = fileReader;
       _formatter = formatter;
-      _output = output;
+      _console = console;
     }
 
     public void Display(string file, int pageSize)
@@ -42,13 +42,13 @@ namespace CsvReader.Core
         var pagedModel = new PagedModel(model, pageIndex, pageSize);
         var formatted = _formatter.Format(pagedModel);
 
-        _output.Clear();
-        _output.Write(formatted);
-        _output.WriteLine("Page {0} of {1}", pageIndex + 1, pagedModel.MaxPageIndex + 1);
-        _output.WriteLine(String.Empty);
-        _output.Write("N(ext page, P(revious page, F(irst page, L(ast page, J(ump to page, eX(it");
+        _console.Clear();
+        _console.Write(formatted);
+        _console.WriteLine("Page {0} of {1}", pageIndex + 1, pagedModel.MaxPageIndex + 1);
+        _console.WriteLine(String.Empty);
+        _console.Write("N(ext page, P(revious page, F(irst page, L(ast page, J(ump to page, eX(it");
        
-        var userInput = _output.Read();
+        var userInput = _console.Read();
 
         var nextAction = DetermineNextAction(pagedModel, userInput, pageIndex);
         pageIndex = nextAction.Execute();

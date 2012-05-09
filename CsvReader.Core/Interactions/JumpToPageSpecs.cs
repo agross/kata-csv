@@ -10,7 +10,7 @@ namespace CsvReader.Core.Interactions
     [Test]
     public void ShouldAskForPageNumber()
     {
-      var output = A.Fake<IOutput>();
+      var output = A.Fake<IConsole>();
       var jtp = new JumpToPage(output);
       jtp.GetCommand(new PagedModel(new Model(), 0, 1), 0);
 
@@ -34,7 +34,7 @@ namespace CsvReader.Core.Interactions
       const int CurrentPage = 1;
       var paged = new PagedModel(model, CurrentPage, 1);
 
-      var output = A.Fake<IOutput>();
+      var output = A.Fake<IConsole>();
       A
         .CallTo(() => output.ReadLine())
         .Returns(userInput);
