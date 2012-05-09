@@ -17,7 +17,7 @@ namespace CsvReader.Core
 
     public void Display(string file, int pageSize)
     {
-      var model = _fileReader.Read(file);
+      var model = new NumberedModel(_fileReader.Read(file));
 
       var pageIndex = 0;
       while (true)

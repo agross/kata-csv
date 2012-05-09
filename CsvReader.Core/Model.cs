@@ -36,9 +36,10 @@ namespace CsvReader.Core
       return this;
     }
 
-    public virtual void SetHeader(IEnumerable<string> items)
+    public virtual Model SetHeader(IEnumerable<string> items)
     {
       _header = items;
+      return this;
     }
 
     public static IEnumerable<string> AllValuesForColumn(int columnIndex, Model model)

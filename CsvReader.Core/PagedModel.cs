@@ -46,7 +46,7 @@ namespace CsvReader.Core
       throw new NotSupportedException();
     }
 
-    public override void SetHeader(IEnumerable<string> items)
+    public override Model SetHeader(IEnumerable<string> items)
     {
       throw new NotSupportedException();
     }

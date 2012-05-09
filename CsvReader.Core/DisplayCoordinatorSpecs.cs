@@ -140,5 +140,32 @@ namespace CsvReader.Core
         .CallTo(() => output.Read())
         .MustHaveHappened();
     }
+
+    [Test]
+    public void Should_UseNumberedModel()
+    {
+      var fileReader = A.Fake<IFileReader>();
+      A
+        .CallTo(() => fileReader.Read(null))
+        .WithAnyArguments()
+        .Returns(new Model()
+                   .SetHeader(new[] { "header" })
+                   .AddRow(new[] { "one" })
+                   .AddRow(new[] { "two" }));
+
+      var formatter = new TableFormatter();
+      var output = A.Fake<IOutput>();
+      A
+        .CallTo(() => output.Read())
+        .Returns('x');
+
+      var coordinator = new DisplayCoordinator(fileReader, formatter, output);
+      
+      coordinator.Display("file.csv", 42);
+
+      A
+        .CallTo(() => output.Write(A<string>.That.StartsWith("No.|header|"), A<object[]>.Ignored))
+        .MustHaveHappened();
+    }
   }
 }

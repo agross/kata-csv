@@ -52,6 +52,8 @@
     <Compile Include="IFormatter.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="ModelSpecs.cs" />
+    <Compile Include="NumberedModel.cs" />
+    <Compile Include="NumberedModelSpecs.cs" />
     <Compile Include="PagedModelSpecs.cs" />
     <Compile Include="TableFormatterSpecs.cs" />
     <Compile Include="Model.cs" />
