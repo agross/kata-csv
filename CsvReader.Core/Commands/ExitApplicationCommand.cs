@@ -4,9 +4,9 @@ namespace CsvReader.Core.Commands
 {
   class ExitApplicationCommand : ICommand
   {
-    public int GetNextPageIndex()
+    public int? GetNextPageIndex()
     {
-      return -1;
+      return null;
     }
   }
 }

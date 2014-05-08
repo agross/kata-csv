@@ -47,11 +47,12 @@ namespace CsvReader.Core
         var userInput = _console.Read();
 
         var nextAction = DetermineNextAction(pagedModel, userInput);
-        pageIndex = nextAction.GetNextPageIndex();
-        if (pageIndex < 0)
+        var maybePageIndex = nextAction.GetNextPageIndex();
+        if (maybePageIndex == null)
         {
           return;
         }
+        pageIndex = maybePageIndex.Value;
       }
     }
 

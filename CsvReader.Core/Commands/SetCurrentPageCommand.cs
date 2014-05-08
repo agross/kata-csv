@@ -9,7 +9,7 @@ namespace CsvReader.Core.Commands
       _pageIndex = pageIndex;
     }
 
-    public int GetNextPageIndex()
+    public int? GetNextPageIndex()
     {
       return _pageIndex;
     }
