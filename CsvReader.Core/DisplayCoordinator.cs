@@ -34,24 +34,20 @@ namespace CsvReader.Core
 
     public void Display(string file, int pageSize)
     {
-      var model = new NumberedModel(_fileReader.Read(file));
+      var modelFromFile = _fileReader.Read(file);
+      var model = new NumberedModel(modelFromFile);
 
       var pageIndex = 0;
       while (true)
       {
         var pagedModel = new PagedModel(model, pageIndex, pageSize);
-        var formatted = _formatter.Format(pagedModel);
+        
+        Display(pagedModel);
 
-        _console.Clear();
-        _console.Write(formatted);
-        _console.WriteLine("Page {0} of {1}", pageIndex + 1, pagedModel.MaxPageIndex + 1);
-        _console.WriteLine(String.Empty);
-        _console.Write("N(ext page, P(revious page, F(irst page, L(ast page, J(ump to page, eX(it");
-       
         var userInput = _console.Read();
 
-        var nextAction = DetermineNextAction(pagedModel, userInput, pageIndex);
-        pageIndex = nextAction.Execute();
+        var nextAction = DetermineNextAction(pagedModel, userInput);
+        pageIndex = nextAction.GetNextPageIndex();
         if (pageIndex < 0)
         {
           return;
@@ -59,11 +55,21 @@ namespace CsvReader.Core
       }
     }
 
-    ICommand DetermineNextAction(PagedModel pagedModel, char action, int currentPageIndex)
+    void Display(PagedModel pagedModel)
+    {
+      var formatted = _formatter.Format(pagedModel);
+      _console.Clear();
+      _console.Write(formatted);
+      _console.WriteLine("Page {0} of {1}", pagedModel.PageIndex + 1, pagedModel.MaxPageIndex + 1);
+      _console.WriteLine(String.Empty);
+      _console.Write("N(ext page, P(revious page, F(irst page, L(ast page, J(ump to page, eX(it");
+    }
+
+    ICommand DetermineNextAction(PagedModel pagedModel, char userInput)
     {
       return _possibleInteractions
-        .First(x => x.CanHandle(action.ToString().ToUpperInvariant()))
-        .GetCommand(pagedModel, currentPageIndex);
+        .First(x => x.CanHandle(userInput.ToString().ToUpperInvariant()))
+        .GetCommand(pagedModel);
     }
   }
 }

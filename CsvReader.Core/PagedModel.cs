@@ -29,7 +29,7 @@ namespace CsvReader.Core
     {
       get
       {
-        return _model.Rows.Skip(_pageIndex * _pageSize).Take(_pageSize);
+        return _model.Rows.Skip(PageIndex * _pageSize).Take(_pageSize);
       }
     }
 
@@ -37,7 +37,18 @@ namespace CsvReader.Core
     {
       get
       {
-        return (int) Math.Ceiling(_model.Rows.Count() / (double) _pageSize) - 1;
+        var pages = (int) Math.Ceiling(_model.Rows.Count() / (double) _pageSize);
+        if (pages == 0)
+          return 0;
+        return pages - 1;
+      }
+    }
+
+    public int PageIndex
+    {
+      get
+      {
+        return _pageIndex;
       }
     }
 

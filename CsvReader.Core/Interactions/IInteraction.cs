@@ -5,6 +5,6 @@ namespace CsvReader.Core.Interactions
   interface IInteraction
   {
     bool CanHandle(string userInput);
-    ICommand GetCommand(PagedModel model, int currentPageIndex);
+    ICommand GetCommand(PagedModel model);
   }
 }

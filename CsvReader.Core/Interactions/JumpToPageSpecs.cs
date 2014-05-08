@@ -12,7 +12,7 @@ namespace CsvReader.Core.Interactions
     {
       var output = A.Fake<IConsole>();
       var jtp = new JumpToPage(output);
-      jtp.GetCommand(new PagedModel(new Model(), 0, 1), 0);
+      jtp.GetCommand(new PagedModel(new Model(), 0, 1));
 
       A
         .CallTo(() => output.ReadLine())
@@ -40,7 +40,7 @@ namespace CsvReader.Core.Interactions
         .Returns(userInput);
 
       var jtp = new JumpToPage(output);
-      var newPageIndex = jtp.GetCommand(paged, CurrentPage).Execute();
+      var newPageIndex = jtp.GetCommand(paged).GetNextPageIndex();
 
       Assert.AreEqual(expectedNewPageIndex, newPageIndex);
     }

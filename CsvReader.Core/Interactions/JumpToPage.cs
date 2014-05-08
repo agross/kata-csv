@@ -16,7 +16,7 @@ namespace CsvReader.Core.Interactions
       return userInput == "J";
     }
 
-    public ICommand GetCommand(PagedModel model, int currentPageIndex)
+    public ICommand GetCommand(PagedModel model)
     {
       _console.Write("Page? ");
       var page = _console.ReadLine();
@@ -28,7 +28,7 @@ namespace CsvReader.Core.Interactions
       }
       else
       {
-        newPageIndex = currentPageIndex;
+        newPageIndex = model.PageIndex;
       }
       return new SetCurrentPageCommand(newPageIndex);
     }

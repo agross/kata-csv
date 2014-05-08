@@ -9,11 +9,9 @@ namespace CsvReader.Core.Interactions
       return userInput == "F";
     }
 
-    public ICommand GetCommand(PagedModel model, int currentPageIndex)
+    public ICommand GetCommand(PagedModel model)
     {
-      currentPageIndex = 0;
-
-      return new SetCurrentPageCommand(currentPageIndex);
+      return new SetCurrentPageCommand(0);
     }
   }
 }

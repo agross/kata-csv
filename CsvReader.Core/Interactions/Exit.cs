@@ -9,7 +9,7 @@ namespace CsvReader.Core.Interactions
       return userInput == "X";
     }
 
-    public ICommand GetCommand(PagedModel model, int currentPageIndex)
+    public ICommand GetCommand(PagedModel model)
     {
       return new ExitApplicationCommand();
     }

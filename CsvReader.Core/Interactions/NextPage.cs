@@ -9,13 +9,13 @@ namespace CsvReader.Core.Interactions
       return userInput == "N";
     }
 
-    public ICommand GetCommand(PagedModel model, int currentPageIndex)
+    public ICommand GetCommand(PagedModel model)
     {
-      currentPageIndex = currentPageIndex + 1;
-      
-      currentPageIndex = EnsurePageIndexRange(model, currentPageIndex);
+      var nextPage = model.PageIndex + 1;
 
-      return new SetCurrentPageCommand(currentPageIndex);
+      nextPage = EnsurePageIndexRange(model, nextPage);
+
+      return new SetCurrentPageCommand(nextPage);
     }
   }
 }

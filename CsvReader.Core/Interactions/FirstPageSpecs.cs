@@ -8,7 +8,7 @@ namespace CsvReader.Core.Interactions
     [Test]
     public void ShouldReturnZeroAsNewPageIndex()
     {
-      var newPageIndex = new FirstPage().GetCommand(null, 0).Execute();
+      var newPageIndex = new FirstPage().GetCommand(null).GetNextPageIndex();
 
       Assert.AreEqual(0, newPageIndex);
     }
