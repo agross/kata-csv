@@ -1,4 +1,4 @@
-﻿using CsvReader.Core;
+using CsvReader.Core;
 
 namespace CsvReader
 {
