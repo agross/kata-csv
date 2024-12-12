@@ -15,11 +15,14 @@ namespace CsvReader.Core
 
       var output = new TableFormatter().Format(model);
 
-      Assert.AreEqual(@"Foo |Bar |
-----+----+
-1   |2   |
-1111|2222|
-", output);
+      Assert.That(output,
+        Is.EqualTo("""
+                   Foo |Bar |
+                   ----+----+
+                   1   |2   |
+                   1111|2222|
+
+                   """));
     }
 
     [Test]
@@ -34,10 +37,13 @@ namespace CsvReader.Core
 
       var output = new TableFormatter().Format(page1);
 
-      Assert.AreEqual(@"Foo|Bar|
----+---+
-1  |2  |
-", output);
+      Assert.That(output,
+        Is.EqualTo("""
+                   Foo|Bar|
+                   ---+---+
+                   1  |2  |
+
+                   """));
     }
 
     [Test]
@@ -52,10 +58,13 @@ namespace CsvReader.Core
 
       var output = new TableFormatter().Format(page1);
 
-      Assert.AreEqual(@"Foo |Bar |
-----+----+
-1111|2222|
-", output);
+      Assert.That(output,
+        Is.EqualTo("""
+                   Foo |Bar |
+                   ----+----+
+                   1111|2222|
+
+                   """));
     }
 
     [Test]
@@ -71,10 +80,13 @@ namespace CsvReader.Core
 
       var output = new TableFormatter().Format(page1);
 
-      Assert.AreEqual(@"Foo|Bar|
----+---+
-11 |22 |
-", output);
+      Assert.That(output,
+        Is.EqualTo("""
+                   Foo|Bar|
+                   ---+---+
+                   11 |22 |
+
+                   """));
     }
   }
 }

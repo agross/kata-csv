@@ -26,10 +26,10 @@ namespace CsvReader.Core.Interactions
     public void ShouldYieldExpectedPageIndexForUserInput(string userInput, int expectedNewPageIndex)
     {
       var model = new Model()
-        .SetHeader(new[] { "header" })
-        .AddRow(new[] { "one" })
-        .AddRow(new[] { "two" })
-        .AddRow(new[] { "three" });
+                  .SetHeader(new[] { "header" })
+                  .AddRow(new[] { "one" })
+                  .AddRow(new[] { "two" })
+                  .AddRow(new[] { "three" });
 
       const int CurrentPage = 1;
       var paged = new PagedModel(model, CurrentPage, 1);
@@ -42,7 +42,7 @@ namespace CsvReader.Core.Interactions
       var jtp = new JumpToPage(output);
       var newPageIndex = jtp.GetCommand(paged).GetNextPageIndex();
 
-      Assert.AreEqual(expectedNewPageIndex, newPageIndex);
+      Assert.That(newPageIndex, Is.EqualTo(expectedNewPageIndex));
     }
   }
 }

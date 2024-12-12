@@ -23,7 +23,7 @@ namespace CsvReader.Core
 
       A
         .CallTo(() => output.Read())
-        .MustHaveHappened(Repeated.Like(i => i == 2));
+        .MustHaveHappenedTwiceExactly();
     }
 
     [Test]
@@ -40,7 +40,7 @@ namespace CsvReader.Core
 
       A
         .CallTo(() => output.Read())
-        .MustHaveHappened(Repeated.Like(i => i == 2));
+        .MustHaveHappenedTwiceExactly();
     }
 
     [Test]
@@ -82,7 +82,7 @@ namespace CsvReader.Core
 
       A
         .CallTo(() => output.Read())
-        .MustHaveHappened(Repeated.Like(i => i == 2));
+        .MustHaveHappenedTwiceExactly();
     }
 
     [Test]
@@ -99,7 +99,7 @@ namespace CsvReader.Core
 
       A
         .CallTo(() => output.Read())
-        .MustHaveHappened(Repeated.Like(i => i == 1));
+        .MustHaveHappenedOnceExactly();
     }
 
     [Test]
@@ -130,11 +130,11 @@ namespace CsvReader.Core
 
       A
         .CallTo(() => output.Write("Die Tabelle", A<object[]>.Ignored))
-        .MustHaveHappened(Repeated.Like(i => i == 1));
+        .MustHaveHappenedOnceExactly();
       
       A
         .CallTo(() => output.Write(A<string>.That.Contains("N(ext"), A<object[]>.Ignored))
-        .MustHaveHappened(Repeated.Like(i => i == 1));
+        .MustHaveHappenedOnceExactly();
 
       A
         .CallTo(() => output.Read())

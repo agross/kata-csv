@@ -16,8 +16,8 @@ namespace CsvReader.Core
       var column1 = Model.AllValuesForColumn(0, model);
       var column2 = Model.AllValuesForColumn(1, model);
 
-      CollectionAssert.AreEqual(column1, new [] { "Foo","1", "1111" });
-      CollectionAssert.AreEqual(column2, new [] { "Bar","2", "2222" });
+      Assert.That(column1, Is.EqualTo(new[] { "Foo", "1", "1111" }).AsCollection);
+      Assert.That(column2, Is.EqualTo(new[] { "Bar", "2", "2222" }).AsCollection);
     }
   }
 }

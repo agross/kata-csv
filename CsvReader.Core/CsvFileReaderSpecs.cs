@@ -1,5 +1,3 @@
-using System.IO;
-using System.Linq;
 using System.Text;
 
 using NUnit.Framework;
@@ -14,14 +12,14 @@ namespace CsvReader.Core
     {
       var input = "Name;Age;City";
       var stream = new MemoryStream(Encoding.UTF8.GetBytes(input));
-      
+
       var model = new CsvFileReader().Read(stream);
 
-      Assert.AreEqual(3, model.Header.Count());
-      Assert.AreEqual("Name", model.Header.First());
-      Assert.AreEqual("Age", model.Header.Skip(1).First());
-      Assert.AreEqual("City", model.Header.Skip(2).First());
-      Assert.IsEmpty(model.Rows);
+      Assert.That(model.Header.Count(), Is.EqualTo(3));
+      Assert.That(model.Header.First(), Is.EqualTo("Name"));
+      Assert.That(model.Header.Skip(1).First(), Is.EqualTo("Age"));
+      Assert.That(model.Header.Skip(2).First(), Is.EqualTo("City"));
+      Assert.That(model.Rows, Is.Empty);
     }
 
     [Test]
@@ -32,13 +30,13 @@ namespace CsvReader.Core
 
       var model = new CsvFileReader().Read(stream);
 
-      Assert.AreEqual(3, model.Header.Count());
-      Assert.AreEqual(model.Rows.Count(), 2);
+      Assert.That(model.Header.Count(), Is.EqualTo(3));
+      Assert.That(model.Rows.Count(), Is.EqualTo(2));
 
       var alex = model.Rows.First();
-      Assert.AreEqual("Alex", alex.First());
-      Assert.AreEqual("31", alex.Skip(1).First());
-      Assert.AreEqual("Leipzig", alex.Skip(2).First());
+      Assert.That(alex.First(), Is.EqualTo("Alex"));
+      Assert.That(alex.Skip(1).First(), Is.EqualTo("31"));
+      Assert.That(alex.Skip(2).First(), Is.EqualTo("Leipzig"));
     }
   }
 }

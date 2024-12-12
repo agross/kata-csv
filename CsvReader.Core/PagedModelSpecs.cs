@@ -20,7 +20,7 @@ namespace CsvReader.Core
 
       var paged = new PagedModel(model, 0, 2);
 
-      Assert.AreEqual(3, paged.MaxPageIndex);
+      Assert.That(paged.MaxPageIndex, Is.EqualTo(3));
     }
   }
 }

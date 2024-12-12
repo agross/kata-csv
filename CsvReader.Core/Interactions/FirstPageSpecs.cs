@@ -10,7 +10,7 @@ namespace CsvReader.Core.Interactions
     {
       var newPageIndex = new FirstPage().GetCommand(null).GetNextPageIndex();
 
-      Assert.AreEqual(0, newPageIndex);
+      Assert.That(newPageIndex, Is.EqualTo(0));
     }
   }
 }
